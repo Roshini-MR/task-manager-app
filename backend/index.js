@@ -5,14 +5,14 @@ const path = require('path')
 const { Server } = require('socket.io')
 
 fastify.register(cors, {
-  origin: 'http://localhost:5173',
+ origin: ['http://localhost:5173', 'https://task-manager-app-inky-chi.vercel.app'],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 })
 
 fastify.register(jwt, {
-  secret: 'taskmanager_secret_key_2024'
+secret: process.env.JWT_SECRET || 'taskmanager_secret_key_2024'
 })
 
 fastify.register(require('@fastify/multipart'))
@@ -44,7 +44,7 @@ const start = async () => {
 
     const io = new Server(fastify.server, {
       cors: {
-        origin: 'http://localhost:5173',
+     origin: ['http://localhost:5173', 'https://task-manager-app-inky-chi.vercel.app'],
         methods: ['GET', 'POST']
       }
     })
