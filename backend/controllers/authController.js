@@ -14,8 +14,8 @@ const register = async (request, reply) => {
       user: { id: user.id, name: user.name, email: user.email }
     })
   } catch (err) {
-    return reply.status(500).send({ message: err.message })
-  }
+console.error('REGISTER ERROR:', err)
+return reply.status(500).send({ message: err.message })  }
 }
 
 const login = async (request, reply) => {
