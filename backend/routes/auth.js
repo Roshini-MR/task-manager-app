@@ -14,15 +14,13 @@ module.exports = async function (fastify, opts) {
         data: { name, email, password: hashed }
       })
       const token = fastify.jwt.sign({ id: user.id, email: user.email })
-
-      // Send welcome email in background
       setTimeout(() => {
         sendWelcomeEmail(email, name).catch(() => {})
       }, 0)
-
       return reply.send({ token, user: { id: user.id, name: user.name, email: user.email } })
     } catch (err) {
-      return reply.status(500).send({ message: 'Server error' })
+      console.error('REGISTER ERROR:', err.message)
+      return reply.status(500).send({ message: err.message })
     }
   })
 
@@ -36,7 +34,8 @@ module.exports = async function (fastify, opts) {
       const token = fastify.jwt.sign({ id: user.id, email: user.email })
       return reply.send({ token, user: { id: user.id, name: user.name, email: user.email } })
     } catch (err) {
-      return reply.status(500).send({ message: 'Server error' })
+      console.error('LOGIN ERROR:', err.message)
+      return reply.status(500).send({ message: err.message })
     }
   })
 
@@ -48,7 +47,8 @@ module.exports = async function (fastify, opts) {
       })
       return reply.send(user)
     } catch (err) {
-      return reply.status(500).send({ message: 'Server error' })
+      console.error('ME ERROR:', err.message)
+      return reply.status(500).send({ message: err.message })
     }
   })
 }
