@@ -24,7 +24,6 @@ export default function Login() {
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center p-4">
-      {/* Background glow */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-indigo-600/10 rounded-full blur-[120px] pointer-events-none" />
 
       <motion.div
@@ -33,7 +32,6 @@ export default function Login() {
         transition={{ duration: 0.5 }}
         className="w-full max-w-md"
       >
-        {/* Logo */}
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-indigo-600 mb-4">
             <span className="text-white text-xl font-bold">T</span>
@@ -42,16 +40,15 @@ export default function Login() {
           <p className="text-zinc-400 mt-2">Sign in to your TaskFlow account</p>
         </div>
 
-        {/* Card */}
         <div className="bg-zinc-900/80 backdrop-blur border border-zinc-800 rounded-2xl p-8">
-          <form onSubmit={handleSubmit} className="space-y-5">
-            {/* Email */}
+          <form onSubmit={handleSubmit} autoComplete="off" className="space-y-5">
             <div>
               <label className="text-sm font-medium text-zinc-300 block mb-2">Email</label>
               <div className="relative">
                 <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500 w-4 h-4" />
                 <input
                   type="email"
+                  autoComplete="off"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="you@example.com"
@@ -61,13 +58,13 @@ export default function Login() {
               </div>
             </div>
 
-            {/* Password */}
             <div>
               <label className="text-sm font-medium text-zinc-300 block mb-2">Password</label>
               <div className="relative">
                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500 w-4 h-4" />
                 <input
                   type="password"
+                  autoComplete="new-password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
@@ -77,7 +74,6 @@ export default function Login() {
               </div>
             </div>
 
-            {/* Submit */}
             <button
               type="submit"
               disabled={loading}
